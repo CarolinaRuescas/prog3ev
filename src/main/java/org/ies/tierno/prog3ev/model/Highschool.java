@@ -5,10 +5,8 @@ import lombok.Data;
 import org.ies.tierno.prog3ev.exceptions.CourseNotFoundException;
 import org.ies.tierno.prog3ev.exceptions.StudentNotFoundException;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @Data
 @AllArgsConstructor
@@ -27,6 +25,7 @@ public class Highschool {
                 .stream()
                 .filter(course -> course.hasStudent(nif))
                 .toList();
+
     }
     //  Ejercicio 5: dado un id de curso y un nif de estudiante,
     //  devuelva los datos de dicho estudiante
@@ -45,5 +44,17 @@ public class Highschool {
         }
         throw new CourseNotFoundException(id);
     }
+
+    // Ejercicio 7: dado un código postal, devuelve todos los estudiantes que viven en ese
+    //código postal.
+
+    public TreeSet<Student> findStudentZipCode (int zipCode){
+        return courses
+                .stream()
+                .flatMap(course -> course.getStudents().stream())
+                .filter(student -> student.getZipCode()==zipCode)
+                .collect(Collectors.toCollection(TreeSet::new));
+    }
+
 
 }
