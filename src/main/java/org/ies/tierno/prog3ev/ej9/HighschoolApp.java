@@ -2,6 +2,7 @@ package org.ies.tierno.prog3ev.ej9;
 
 import lombok.extern.log4j.Log4j;
 import org.ies.tierno.prog3ev.exceptions.CourseNotFoundException;
+import org.ies.tierno.prog3ev.exceptions.ProfessorNotFoundException;
 import org.ies.tierno.prog3ev.exceptions.StudentNotFoundException;
 import org.ies.tierno.prog3ev.model.Course;
 import org.ies.tierno.prog3ev.model.Highschool;
@@ -31,8 +32,8 @@ public class HighschoolApp {
                 var courses = highschool.findStudentCourse(nif);
                 log.info(courses);
 
-            }else if (option == 2){
-                try{
+            }else if (option == 2) {
+                try {
                     log.info("Introduce el id del curso: ");
                     int id = scanner.nextInt();
                     scanner.nextLine();
@@ -43,8 +44,24 @@ public class HighschoolApp {
                     var student = highschool.findStudent(id, nif);
                     log.info(student);
 
-                }catch (StudentNotFoundException | CourseNotFoundException e){
+                } catch (StudentNotFoundException | CourseNotFoundException e) {
                     log.error(e.getMessage());
+                } catch (InputMismatchException e) {
+                    log.error("El id del curso debe ser un número entero");
+                    scanner.nextLine();
+                }
+            }else if (option == 3){
+                try{
+                    log.info("Introduce el id del curso: ");
+                    int id = scanner.nextInt();
+                    scanner.nextLine();
+
+                    var professor = highschool.findProfessorCourse(id);
+                    log.info(professor);
+
+                }catch (CourseNotFoundException | ProfessorNotFoundException e) {
+                    log.error(e.getMessage());
+
                 }catch (InputMismatchException e){
                     log.error("El id del curso debe ser un número entero");
                     scanner.nextLine();
@@ -52,7 +69,7 @@ public class HighschoolApp {
             }else{
                 log.info("Saliendoo.....");
             }
-        }while (option != 3);
+        }while (option != 4);
     }
 
     private int chooseOption(){
@@ -62,11 +79,12 @@ public class HighschoolApp {
                 log.info("ELIGE UNA OPCIÓN");
                 log.info("1. Ver cursos de estudiante");
                 log.info("2. Ver estudiante en curso");
-                log.info("3. Salir");
+                log.info("3. Ver profesor por curso");
+                log.info("4. Salir");
 
                 option = scanner.nextInt();
 
-                if(option < 1 || option > 3){
+                if(option < 1 || option > 4){
                     log.error("la opcion en inválida");
                 }
             }catch (InputMismatchException e){
@@ -74,7 +92,7 @@ public class HighschoolApp {
             }finally {
                 scanner.nextLine();
             }
-        }while (option != 1 && option != 2 && option != 3);
+        }while (option != 1 && option != 2 && option != 3 && option !=4);
 
         return option;
     }

@@ -3,6 +3,7 @@ package org.ies.tierno.prog3ev.model;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import org.ies.tierno.prog3ev.exceptions.CourseNotFoundException;
+import org.ies.tierno.prog3ev.exceptions.ProfessorNotFoundException;
 import org.ies.tierno.prog3ev.exceptions.StudentNotFoundException;
 
 import java.util.*;
@@ -56,5 +57,14 @@ public class Highschool {
                 .collect(Collectors.toCollection(TreeSet::new));
     }
 
+    // Ejercicio 10: Dado un id de curso, devuelve el profesor que imparte el curso.
+    // Si no existe el curso, lanza la excepción CourseNotFoundException.
 
+    public Professor findProfessorCourse (int id) throws CourseNotFoundException, ProfessorNotFoundException {
+            var course = findCourse(id);
+            if (professorByNif.containsKey(course.getProfessorNif())){
+                return professorByNif.get(course.getProfessorNif());
+            }
+            throw new ProfessorNotFoundException(course.getProfessorNif());
+    }
 }

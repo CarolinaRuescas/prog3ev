@@ -2,6 +2,7 @@ package org.ies.tierno.prog3ev.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import org.ies.tierno.prog3ev.exceptions.ProfessorNotFoundException;
 import org.ies.tierno.prog3ev.exceptions.StudentNotFoundException;
 
 import java.util.TreeSet;
@@ -33,5 +34,14 @@ public class Course {
         }
         throw new StudentNotFoundException(nif);
 
+    }
+
+    public Professor findProfessor(String nif) throws ProfessorNotFoundException {
+        var professor = findProfessor(nif);
+        if (professor != null){
+            return professor;
+        }else {
+            throw new ProfessorNotFoundException(nif);
+        }
     }
 }

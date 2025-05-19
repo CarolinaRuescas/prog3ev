@@ -167,4 +167,8 @@ Implementa el método `run` del componente HighschoolApp:
 
 En caso de excepción muestra al usuario un mensaje informativo. 
 
+### Ejercicio 10 (2 punto)
+
+Dado un id de curso, devuelve el profesor que imparte el curso. Si no existe el curso, 
+lanza la excepción CourseNotFoundException.
 # prog3ev
