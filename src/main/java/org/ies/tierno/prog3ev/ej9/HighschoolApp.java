@@ -46,9 +46,6 @@ public class HighschoolApp {
 
                 } catch (StudentNotFoundException | CourseNotFoundException e) {
                     log.error(e.getMessage());
-                } catch (InputMismatchException e) {
-                    log.error("El id del curso debe ser un número entero");
-                    scanner.nextLine();
                 }
             }else if (option == 3){
                 try{
@@ -61,10 +58,6 @@ public class HighschoolApp {
 
                 }catch (CourseNotFoundException | ProfessorNotFoundException e) {
                     log.error(e.getMessage());
-
-                }catch (InputMismatchException e){
-                    log.error("El id del curso debe ser un número entero");
-                    scanner.nextLine();
                 }
             }else{
                 log.info("Saliendoo.....");
