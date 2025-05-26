@@ -20,13 +20,13 @@ public class HighschoolTests {
 
     private Highschool createTestHighschool(){
         TreeSet<Student> dawStudents = new TreeSet<>();
-        dawStudents.add(new Student("2x", "Calamardo", "Esponja", 5263 ));
-        dawStudents.add(new Student("5x", "Maria", "gonzalez", 25362));
+        dawStudents.add(new Student("2x", "Calamardo", "Esponja", 25));
+        dawStudents.add(new Student("5x", "Maria", "gonzalez", 25));
 
         TreeSet<Student> damStudents = new TreeSet<>();
-        damStudents.add(new Student("6x", "Pepe", "Perez", 5263));
-        damStudents.add(new Student("9x", "Sole", "Gutierrez", 6235));
-        damStudents.add(new Student("8x", "Loles", "Leon", 25063));
+        damStudents.add(new Student("6x", "Pepe", "Perez", 52));
+        damStudents.add(new Student("9x", "Sole", "Gutierrez", 52));
+        damStudents.add(new Student("8x", "Loles", "Leon", 52));
 
         return new Highschool(
                 "Tierno Galvan",
@@ -35,8 +35,8 @@ public class HighschoolTests {
                         "25x", new Professor("25x", "Peppa", "Pig")
                 ),
                 List.of(
-                        new Course(56, "Daw", 200, "52x", dawStudents),
-                        new Course(58, "Dam", 2500, "68x", damStudents)
+                        new Course(56, "Daw", 200, "23x", dawStudents),
+                        new Course(58, "Dam", 2500, "25x", damStudents)
                 )
         );
     }
@@ -46,9 +46,9 @@ public class HighschoolTests {
     public void findStudentTest() throws CourseNotFoundException, StudentNotFoundException{
         var highschool = createTestHighschool();
 
-        var result = highschool.findStudent(5, "56x");
+        var result = highschool.findStudent(56, "2x");
 
-        var expected = new Student("56x", "pepa", "pig", 25323);
+        var expected = new Student("2x", "Calamardo", "Esponja", 25);
 
         Assertions.assertEquals(result,expected);
 
@@ -61,7 +61,7 @@ public class HighschoolTests {
                 CourseNotFoundException.class,
                 ()->{
                     var highschool = createTestHighschool();
-                    highschool.findStudent(2,"50x");
+                    highschool.findStudent(2,"23x");
                 }
         );
     }
@@ -73,7 +73,7 @@ public class HighschoolTests {
                 StudentNotFoundException.class,
                 ()->{
                     var highschool = createTestHighschool();
-                    highschool.findStudent(3, "562x");
+                    highschool.findStudent(56, "30x");
                 }
         );
     }
@@ -82,13 +82,13 @@ public class HighschoolTests {
     public void findZipCodeStudentsTest(){
         var highschool = createTestHighschool();
 
-        var result = highschool.findStudentZipCode(5252);
+        var result = highschool.findStudentZipCode(52);
 
         var expected = new TreeSet<Student>();
 
-        expected.add(new Student("59x", "Juanito", "Perez", 52632));
-        expected.add(new Student("526x", "Lola", "Mento", 58632));
-        expected.add(new Student("58x", "Carolina", "Carol", 52526));
+        expected.add(new Student("6x", "Pepe", "Perez", 52));
+        expected.add(new Student("9x", "Sole", "Gutierrez", 52));
+        expected.add(new Student("8x", "Loles", "Leon", 52));
 
         Assertions.assertEquals(result,expected);
     }
